@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Jackson Encrypt
+
+server:
+  port: 8080
+
+encryption:
+  password: DoNotShareOrCommitThis
+  salt: 12345678
