@@ -10,6 +10,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      checks: write
     runs-on: ubuntu-latest
 
     steps:
@@ -31,4 +33,3 @@ jobs:
         with:
           report_paths: '**/target/surefire-reports/TEST-*.xml'
           include_passed: true
-          token: ${{ secrets.GITHUB_TOKEN }}
