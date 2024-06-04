@@ -5,11 +5,9 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import org.springframework.security.crypto.encrypt.BytesEncryptor;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Component
 public class JsonEncryptSerializer extends JsonSerializer<Object> {
 
     private final BytesEncryptor bytesEncryptor;

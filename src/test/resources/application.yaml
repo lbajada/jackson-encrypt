@@ -1,0 +1,3 @@
+encryption:
+  password: DoNotShareOrCommitThis
+  salt: 12345678

@@ -4,20 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.lukebajada.jackson_encrypt.serializers.modifiers.JsonEncryptDeserializerModifier;
 import org.lukebajada.jackson_encrypt.serializers.modifiers.JsonEncryptSerializerModifier;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.encrypt.BytesEncryptor;
 
-@Configuration
+@TestConfiguration
 public class JacksonConfig {
 
     @Bean
-    public ObjectMapper basicObjectMapper() {
-        return new ObjectMapper();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper(JsonEncryptSerializerModifier jsonEncryptSerializerModifier, JsonEncryptDeserializerModifier jsonEncryptDeserializerModifier) {
+    public ObjectMapper objectMapper(BytesEncryptor bytesEncryptor) {
         ObjectMapper mapper = new ObjectMapper();
+
+        JsonEncryptSerializerModifier jsonEncryptSerializerModifier = new JsonEncryptSerializerModifier(bytesEncryptor);
+        JsonEncryptDeserializerModifier jsonEncryptDeserializerModifier = new JsonEncryptDeserializerModifier(bytesEncryptor);
 
         SimpleModule module = new SimpleModule();
         module.setSerializerModifier(jsonEncryptSerializerModifier);

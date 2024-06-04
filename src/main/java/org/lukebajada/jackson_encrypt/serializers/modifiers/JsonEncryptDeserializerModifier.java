@@ -7,20 +7,16 @@ import com.fasterxml.jackson.databind.deser.BeanDeserializerBuilder;
 import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
 import org.lukebajada.jackson_encrypt.annotations.JsonEncrypt;
 import org.lukebajada.jackson_encrypt.serializers.JsonEncryptDeserializer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.encrypt.BytesEncryptor;
-import org.springframework.stereotype.Component;
 
-@Component
 public class JsonEncryptDeserializerModifier extends BeanDeserializerModifier {
     private final BytesEncryptor bytesEncryptor;
 
     private final ObjectMapper objectMapper;
 
-    public JsonEncryptDeserializerModifier(BytesEncryptor bytesEncryptor, @Qualifier("basicObjectMapper") ObjectMapper objectMapper) {
+    public JsonEncryptDeserializerModifier(BytesEncryptor bytesEncryptor) {
         this.bytesEncryptor = bytesEncryptor;
-        this.objectMapper = objectMapper;
+        this.objectMapper = new ObjectMapper();
     }
 
     @Override
